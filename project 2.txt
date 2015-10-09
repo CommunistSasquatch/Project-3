@@ -1,0 +1,7 @@
+Objectives:
+[] Looping: for, while, foreach
+[] Proper input validation/sanitization
+[] Nesting logic
+[] Break & continue
+ When the clerk enters fewer than 1 or more than 12 items, the program re-prompts the clerk two more times. If the clerk enters a high value on the third attempt, the program accepts the high value, but if the clerk enters a negative value on the third attempt, an error message is displayed and the order is not counted. At the end of the program, display a count of the number of items ordered by customers from the same zip code as the coffee shop (54984), and a count from other zip codes. Also display the average customer age, as well as counts of the number of items ordered by customers under 30 and by customers 30 and older.
+
