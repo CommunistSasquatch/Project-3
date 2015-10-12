@@ -6,19 +6,19 @@
 use 5.14.1;
 use warnings;
 
-my ($zipCode, $age, $numOfItems, $continueInt);
-my ($name);
+my ($zipCode, $age, $numOfItems, $numOfItemsSameZip, $numOfItemsNotSameZip);
+my ($name, $continueInt);
 use constant "YES" => 1;
 use constant "MAX_ZIP" => 99950;
 use constant "MIN_ZIP" => 00501;
-use constant "MAX_AGE" => 10;
-use constant "MIN_AGE" => 110;
+use constant "MAX_AGE" => 110;
+use constant "MIN_AGE" => 10;
 use constant "MIN_ITEMS" => 1;
 use constant "MAX_ITEMS" => 12;
 
 
 sub main {
-	print "\t\t\tWelcome to Cafe Noir Coffee Shope\n\n";
+	print "\t\t\t\n\nWelcome to Cafe Noir Coffee Shope\n\n";
 	setContinueInt();
 	while ($continueInt = YES){
 		askName();
@@ -34,6 +34,7 @@ sub main {
 main();
 
 sub setContinueInt {
+	$continueInt = 0;
 	print ("\n\nWould you like to continue?(Yes = 1 and No = 0) ");
 	chomp ($continueInt = <STDIN>);
 	if ($continueInt != YES) {
@@ -43,7 +44,7 @@ sub setContinueInt {
 }
 
 sub askName {
-	print ("What is the customers name? ");
+	print ("\n\nWhat is the customers name? ");
 	chomp ($name = <STDIN>);
 }
 
@@ -59,6 +60,7 @@ sub askZip {
 }
 
 sub askAge {
+	$age = 0;
 	print ("\n\nWhat is the customers age? ");
 	chomp ($age = <STDIN>);
 	if ($age < MIN_AGE || $age > MAX_AGE) {
@@ -66,20 +68,19 @@ sub askAge {
 		print "Age entered is not valid!";
 		sleep 1;
 		askAge();
+	}
 }
 
 sub askNumOfItems {
 	use constant MAX_ATTEMPTS => 2;
-		print ("\n\nHow many items will the customer be ordering? ");
-		chomp ($numOfItems = <STDIN>);
-	for (my $i = 0; $i < MAX_ATTEMPTS && ($numOfItems >= MIN_ITEMS) $; $i++){
-
-		if () {
-			
+	$numOfItems = 0;
+		for (my $i = 0; $i <= MAX_ATTEMPTS && ($numOfItems < MIN_ITEMS || $numOfItems > MAX_ITEMS); $i++) {
+			print ("\n\nHow many items will the customer be ordering? ");
+			chomp ($numOfItems = <STDIN>);
+			if ($i == MAX_ATTEMPTS && $numOfItems < MIN_ITEMS) {
+				printError();
+			} 
 		}
-	}
-	
-
 }
 
 sub printResults {
@@ -94,4 +95,10 @@ sub printGoodbye {
 	print ("\n\n\t\t\t\tGoodbye!\n\n");
 	sleep 2;
 	die;
+}
+
+sub printError {
+	system ("cls");
+	print ("\n\nOrder is not counted");
+	main();
 }
